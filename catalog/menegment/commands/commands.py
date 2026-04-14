@@ -20,10 +20,6 @@ class Command(BaseCommand):
             price="95000",
             category=category,
         )
-        for category in Category:
-            category, created = Category.objects.get_or_create()
-            if created:
-                self.stdout.write(self.style.SUCCESS("БД успешно заполнена"))
-            else:
-                self.stdout.write(self.style.WARNING("БД не заполнена"))
+
+        self.stdout.write(self.style.SUCCESS("БД успешно заполнена"))
 
