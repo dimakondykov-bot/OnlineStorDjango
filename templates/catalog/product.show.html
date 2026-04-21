@@ -1,16 +1,14 @@
 {% extends 'common/base.html' %}
 
 {% block main %}
-<div class="container mt-5">
-    <!-- Кнопка назад -->
-    <nav aria-label="breadcrumb" class="mb-4">
-        <a href="{% url 'catalog:home' %}" class="btn btn-outline-secondary btn-sm">
-            &larr; Вернуться в каталог
-        </a>
-    </nav>
+    <div class="container mt-5">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <a href="{% url 'catalog:home' %}" class="btn btn-outline-secondary btn-sm">
+                &larr; Вернуться в каталог
+            </a>
+        </nav>
 
     <div class="row gx-lg-5">
-        <!-- Колонка с изображением -->
         <div class="col-md-5 mb-4">
             <div class="product-image shadow-sm rounded overflow-hidden bg-light d-flex align-items-center justify-content-center"
                  style="min-height: 400px;">
@@ -23,7 +21,6 @@
             </div>
         </div>
 
-        <!-- Колонка с информацией -->
         <div class="col-md-7">
             <h1 class="display-5 fw-bold mb-3">{{ product.name }}</h1>
 

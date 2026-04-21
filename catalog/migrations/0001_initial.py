@@ -70,7 +70,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "image",
+                    "images",
                     models.ImageField(
                         blank=True,
                         help_text="Приложите фото товара",
