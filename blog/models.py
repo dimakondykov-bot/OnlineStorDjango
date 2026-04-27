@@ -39,7 +39,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'preview', 'is_published', 'views_count', 'create_at']
+    fields = ['title', 'content', 'preview', 'is_published']
     success_url = reverse_lazy('blog:list')
 
 
@@ -53,6 +53,6 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
         # Пользователя вернёт на эту же статью, а не в общий список
 
 
-class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('blog:list')
