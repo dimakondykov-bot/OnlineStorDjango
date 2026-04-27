@@ -1,31 +1,32 @@
-from django.core.paginator import Paginator
-from django.http import HttpRequest
-from django.shortcuts import render
+from django.views.generic import ListView, DetailView, TemplateView
 from catalog.models import Product
 
+class ProductListView(ListView):
+    model = Product
+    template_name = 'catalog/home.html'
+    context_object_name = 'page_range'
+    paginate_by = 6
+    ordering = ['id']
 
-def product_list(request):
-    product_list = Product.objects.all().order_by('id')
-    paginator = Paginator(product_list, 6)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        paginator = context['paginator']
+        page_obj = context['page_obj']
 
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    custom_page_range = paginator.get_elided_page_range(page_obj.number, on_each_side=1, on_ends=1)
-
-    return render(request, 'catalog/home.html', {
-        'page_obj': page_obj,
-        'page_range': custom_page_range
-    })
-
-
-def contacts(request):
-    if request.method == 'GET':
-        return render(request, 'catalog/contacts.html')
-    return None
+        context['page_range'] = paginator.get_elided_page_range(
+            page_obj.number,
+            on_each_side=1,
+            on_ends=1
+        )
+        return context
 
 
-def get_product(request: HttpRequest, product_id: int):
-    product = Product.objects.get(id=product_id)
-    context = {'product': product}
-    return render(request, 'catalog/product.show.html', context)
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'catalog/product.show.html'
+    context_object_name = 'product'
+    pk_url_kwarg = 'product_id'
+
+
+class ContactView(TemplateView):
+    template_name = 'catalog/contacts.html'
