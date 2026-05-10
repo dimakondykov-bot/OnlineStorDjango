@@ -11,6 +11,9 @@
     <div class="container">
         {% if page_obj %}
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="mb-4 text-end">
+                <a href="{% url 'catalog:create'%}" class="btn btn-success">Добавить товар</a>
+            </div>
                 {% for product in page_obj %}
                     <div class="col">
                         <div class="card shadow-sm h-100">
@@ -35,12 +38,14 @@
                                            class="btn btn-sm btn-outline-secondary">
                                             Открыть
                                         </a>
+                                        <a href="{% url 'catalog:update' product.pk%}" class="btn btn-sm btn-outline-warning">Изменить</a>
+                                        <a href="{% url 'catalog:delete' product.pk%}" class="btn btn-sm btn-outline-danger">Удалить</a>
                                     </div>
                                     <small class="text-body-secondary">{{ product.price }}₽</small>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                     </div>
                 {% endfor %}
             </div>
 
